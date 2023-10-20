@@ -1,56 +1,29 @@
 package org.midominio;
 
-
-//import org.midominio.behavioral.command.CreditCard;
-//import org.midominio.behavioral.command.CreditCardActivateCommand;
-//import org.midominio.behavioral.command.CreditCardDesactivateCommand;
-//import org.midominio.behavioral.command.CreditCardInvoker;
-import org.midominio.behavioral.command2.commands.CommandHistory;
-import org.midominio.behavioral.command2.commands.CreditCardActivateCommand;
-import org.midominio.behavioral.command2.commands.CreditCardDesactivateCommand;
-import org.midominio.behavioral.command2.creditcard.CreditCard;
-import org.midominio.behavioral.command2.invoker.CreditCardInvoker;
-
-import java.util.*;
+import org.midominio.behavioral.iterator.Card;
+import org.midominio.behavioral.iterator.CardList;
+import org.midominio.behavioral.iterator.Iterator;
+import org.midominio.behavioral.iterator.List;
 
 public class Main {
     public static void main(String[] args) {
         testPattern();
     }
     private static void testPattern(){
-        //invoker 1
-//        CreditCard creditCard = new CreditCard();
-//        CreditCard creditCardDesactivate = new CreditCard();
-//
-//        CreditCardInvoker invoker = new CreditCardInvoker();
-//
-//        invoker.setCommand(new CreditCardActivateCommand(creditCard));
-//        invoker.run();
-//
-//        System.out.println("------------------");
-//
-//        invoker.setCommand(new CreditCardDesactivateCommand(creditCardDesactivate));
-//        invoker.run();
+        //Iterator 1
+        Card[] cards = new Card[5];
+        cards[0] = new Card("VISA");
+        cards[1] = new Card("AMEX");
+        cards[2] = new Card("MASTER CARD");
+        cards[3] = new Card("GOOGLE CARD");
+        cards[4] = new Card("APPLE CARD");
 
-        //invoker 2
-        CreditCard creditCard = new CreditCard();
-        CreditCardActivateCommand activateCommand = new CreditCardActivateCommand(creditCard);
-        CreditCardDesactivateCommand desactivateCommand = new CreditCardDesactivateCommand(creditCard);
+        List lista = new CardList(cards);
+        Iterator iterator = lista.iterator();
 
-        CreditCardInvoker invoker = new CreditCardInvoker();
-        CommandHistory history = new CommandHistory();
-
-        //activate
-        invoker.setCommand(activateCommand);
-        invoker.executeCommand();
-        history.push(activateCommand);
-
-        //desactivate
-        invoker.setCommand(desactivateCommand);
-        invoker.executeCommand();
-        history.push(desactivateCommand);
-
-        history.pop();
-
+        while(iterator.hasNext()){
+            Card tarjeta = (Card) iterator.next();
+            System.out.println(tarjeta.getType());
+        }
     }
 }
