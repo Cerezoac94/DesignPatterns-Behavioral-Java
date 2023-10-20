@@ -1,5 +1,6 @@
 package org.midominio.behavioral.command;
 
+//Receiver / Request
 public class CreditCard {
     public void sendPinNumberToCustomer(){
         System.out.println("El pin ha sido enviado al cliente.");

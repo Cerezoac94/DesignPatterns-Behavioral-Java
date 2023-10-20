@@ -1,5 +1,6 @@
 package org.midominio.behavioral.command;
 
+//concrete command
 public class CreditCardActivateCommand implements Command{
     CreditCard creditCard;
     public CreditCardActivateCommand(CreditCard creditCard){
