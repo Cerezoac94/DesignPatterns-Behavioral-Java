@@ -1,29 +1,46 @@
 package org.midominio;
 
-import org.midominio.behavioral.iterator.Card;
-import org.midominio.behavioral.iterator.CardList;
-import org.midominio.behavioral.iterator.Iterator;
-import org.midominio.behavioral.iterator.List;
+
+import org.midominio.behavioral.mediator.ConcreteColleague1;
+import org.midominio.behavioral.mediator.ConcreteColleague2;
+import org.midominio.behavioral.mediator.ConcreteMediator;
+import org.midominio.behavioral.mediator2.colleagues.Student;
+import org.midominio.behavioral.mediator2.colleagues.Teacher;
+import org.midominio.behavioral.mediator2.mediator.Note;
+import org.midominio.behavioral.mediator2.mediator.NotesMediator;
 
 public class Main {
     public static void main(String[] args) {
         testPattern();
     }
     private static void testPattern(){
-        //Iterator 1
-        Card[] cards = new Card[5];
-        cards[0] = new Card("VISA");
-        cards[1] = new Card("AMEX");
-        cards[2] = new Card("MASTER CARD");
-        cards[3] = new Card("GOOGLE CARD");
-        cards[4] = new Card("APPLE CARD");
+        //Mediator 1
+//        ConcreteMediator mediator = new ConcreteMediator();
+//        ConcreteColleague1 user1 = new ConcreteColleague1(mediator);
+//        ConcreteColleague2 user2 = new ConcreteColleague2(mediator);
+//
+//        mediator.setUser1(user1);
+//        mediator.setUser2(user2);
+//
+//        user1.send("Hola soy user 1");
+//        user2.send("Hola user1, soy user2");
 
-        List lista = new CardList(cards);
-        Iterator iterator = lista.iterator();
+        //Mediator 2
+        NotesMediator notes = new NotesMediator();
+        Teacher teacher = new Teacher(notes, "Jorge");
+        Student student = new Student(notes, "José");
 
-        while(iterator.hasNext()){
-            Card tarjeta = (Card) iterator.next();
-            System.out.println(tarjeta.getType());
-        }
+        Note note1 = new Note();
+        note1.setName("Nota de pogra");
+        note1.setText("Este es un ejemplo de nota de programación");
+
+        teacher.createNote(note1);
+
+        Note note2 = new Note();
+        note2.setName("Nota de patrones de diseño");
+        note2.setText("Este es un ejemplo de nota de patrones de diseño");
+
+        student.createNote(note2);
+        teacher.deleteNote(note2);
     }
 }
