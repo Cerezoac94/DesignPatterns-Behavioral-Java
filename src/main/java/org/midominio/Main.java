@@ -1,46 +1,42 @@
 package org.midominio;
 
 
-import org.midominio.behavioral.mediator.ConcreteColleague1;
-import org.midominio.behavioral.mediator.ConcreteColleague2;
-import org.midominio.behavioral.mediator.ConcreteMediator;
-import org.midominio.behavioral.mediator2.colleagues.Student;
-import org.midominio.behavioral.mediator2.colleagues.Teacher;
-import org.midominio.behavioral.mediator2.mediator.Note;
-import org.midominio.behavioral.mediator2.mediator.NotesMediator;
+import org.midominio.behavioral.memento.Article;
+import org.midominio.behavioral.memento.ArticleMemento;
+import org.midominio.behavioral.memento.Caretaker;
 
 public class Main {
     public static void main(String[] args) {
         testPattern();
     }
     private static void testPattern(){
-        //Mediator 1
-//        ConcreteMediator mediator = new ConcreteMediator();
-//        ConcreteColleague1 user1 = new ConcreteColleague1(mediator);
-//        ConcreteColleague2 user2 = new ConcreteColleague2(mediator);
-//
-//        mediator.setUser1(user1);
-//        mediator.setUser2(user2);
-//
-//        user1.send("Hola soy user 1");
-//        user2.send("Hola user1, soy user2");
+        //Memento 1
+        Caretaker caretaker = new Caretaker();
+        Article article = new Article("Christopher Nolan", "Memento es una película");
+        article.setText(article.getText() + " de Nolan");
+        //caretaker index 0
+        caretaker.addMemento(article.createMemento());
 
-        //Mediator 2
-        NotesMediator notes = new NotesMediator();
-        Teacher teacher = new Teacher(notes, "Jorge");
-        Student student = new Student(notes, "José");
+        article.setText(article.getText() + ", protagonizada por Guy Pearce");
+        System.out.println(article.getText());
+        //caretaker index 1
+        caretaker.addMemento(article.createMemento());
 
-        Note note1 = new Note();
-        note1.setName("Nota de pogra");
-        note1.setText("Este es un ejemplo de nota de programación");
+        article.setText(article.getText() + " y Leonardo DiCaprio");
+        System.out.println(article.getText());
 
-        teacher.createNote(note1);
+        ArticleMemento memento1 = caretaker.getMemento(0);
+        ArticleMemento memento2 = caretaker.getMemento(1);
 
-        Note note2 = new Note();
-        note2.setName("Nota de patrones de diseño");
-        note2.setText("Este es un ejemplo de nota de patrones de diseño");
+        article.restoreMemento(memento1); //pos 0
+        System.out.println(article.getText()); //"Memento es una película de Nolan"
 
-        student.createNote(note2);
-        teacher.deleteNote(note2);
+        article.restoreMemento(memento2); //pos 1
+        System.out.println(article.getText()); // "Memento es una película de Nolan, protagonizada por Guy Pearce"
+
+        article.setText(article.getText() + " del año 2000");
+        System.out.println(article.getText());
+
+        //Memento 2
     }
 }
