@@ -1,42 +1,59 @@
 package org.midominio;
 
 
-import org.midominio.behavioral.memento.Article;
-import org.midominio.behavioral.memento.ArticleMemento;
-import org.midominio.behavioral.memento.Caretaker;
+//import org.midominio.behavioral.observer.Coche;
+//import org.midominio.behavioral.observer.MessagePublisher;
+//import org.midominio.behavioral.observer.Peaton;
+//import org.midominio.behavioral.observer.Semaforo;
+
+
+//import org.midominio.behavioral.observer2.listeners.DiscountItemListener;
+//import org.midominio.behavioral.observer2.listeners.NewItemListener;
+//import org.midominio.behavioral.observer2.store.Store;
+
+import org.midominio.behavioral.observer3.BinaryObserver;
+import org.midominio.behavioral.observer3.HexaObserver;
+import org.midominio.behavioral.observer3.OctalObserver;
+import org.midominio.behavioral.observer3.Subject;
 
 public class Main {
     public static void main(String[] args) {
         testPattern();
     }
     private static void testPattern(){
-        //Memento 1
-        Caretaker caretaker = new Caretaker();
-        Article article = new Article("Christopher Nolan", "Memento es una película");
-        article.setText(article.getText() + " de Nolan");
-        //caretaker index 0
-        caretaker.addMemento(article.createMemento());
+        //Observer 1
+//        Coche coche = new Coche();
+//        Peaton peaton = new Peaton();
+//        MessagePublisher messagePublisher = new MessagePublisher();
+//
+//        messagePublisher.attach(coche);
+//        messagePublisher.attach(peaton);
+//        messagePublisher.notifyUpdate(new Semaforo("ROJO"));
+//        try {
+//            Thread.sleep(5000);
+//        }catch (Exception ex){
+//            ex.printStackTrace();
+//        }
+//        messagePublisher.notifyUpdate(new Semaforo("VERDE"));
 
-        article.setText(article.getText() + ", protagonizada por Guy Pearce");
-        System.out.println(article.getText());
-        //caretaker index 1
-        caretaker.addMemento(article.createMemento());
+        //Observer 2
+//        Store store = new Store();
+//        store.events.suscribe("Nuevo_Articulo", new NewItemListener("email@gmail.com"));
+//        store.events.suscribe("Descuento_Articulo", new DiscountItemListener("correo@gmail.com"));
+//
+//        store.newItem("Computadora");
+//        store.discountItem("Computadora");
 
-        article.setText(article.getText() + " y Leonardo DiCaprio");
-        System.out.println(article.getText());
+        //Observer 3
+        Subject subject = new Subject();
 
-        ArticleMemento memento1 = caretaker.getMemento(0);
-        ArticleMemento memento2 = caretaker.getMemento(1);
+        BinaryObserver binaryObserver = new BinaryObserver(subject);
+        HexaObserver hexaObserver = new HexaObserver(subject);
+        OctalObserver octalObserver = new OctalObserver(subject);
 
-        article.restoreMemento(memento1); //pos 0
-        System.out.println(article.getText()); //"Memento es una película de Nolan"
-
-        article.restoreMemento(memento2); //pos 1
-        System.out.println(article.getText()); // "Memento es una película de Nolan, protagonizada por Guy Pearce"
-
-        article.setText(article.getText() + " del año 2000");
-        System.out.println(article.getText());
-
-        //Memento 2
+        System.out.println("First state change: 15");
+        subject.setState(15);
+        System.out.println("Second state change: 10");
+        subject.setState(10);
     }
 }
