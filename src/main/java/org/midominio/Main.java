@@ -1,27 +1,34 @@
 package org.midominio;
 
 
-import org.midominio.behavioral.interpreter.AndExpression;
-import org.midominio.behavioral.interpreter.Expression;
-import org.midominio.behavioral.interpreter.OrExpression;
-import org.midominio.behavioral.interpreter.TerminalExpression;
+//import org.midominio.behavioral.strategy.CapitalStrategyTextFormatter;
+//import org.midominio.behavioral.strategy.Context;
+//import org.midominio.behavioral.strategy.LowerStrategyTextFormatter;
+
+import org.midominio.behavioral.strategy2.context.Context;
+import org.midominio.behavioral.strategy2.strategies.CircleStrategy;
+import org.midominio.behavioral.strategy2.strategies.TriangleStrategy;
 
 public class Main {
     public static void main(String[] args) {
         testPattern();
     }
     private static void testPattern(){
-        //Interpreter 1
-        Expression cero = new TerminalExpression("0");
-        Expression uno = new TerminalExpression("1");
+        //Strategy 1
+//        Context context = new Context(new CapitalStrategyTextFormatter());
+//        context.publishText("Este texto deberá ser convertido a mayúsculas");
+//
+//        context = new Context(new LowerStrategyTextFormatter());
+//        context.publishText("ESTE TEXTO DEBERÁ SER CONVERTIDO A MINÚSCULAS");
 
-        Expression containBoolean = new OrExpression(cero,uno);
-        Expression containOneAndCero = new AndExpression(cero,uno);
+        //Strategy 2
+        //circulo
+        Context context = new Context(new CircleStrategy(13));
+        context.calculateArea();
 
-        System.out.println(containBoolean.interpret("cero"));
-        System.out.println(containBoolean.interpret("0"));
+        //triangulo
+        context = new Context(new TriangleStrategy(10, 7));
+        context.calculateArea();
 
-        System.out.println(containOneAndCero.interpret("0"));
-        System.out.println(containOneAndCero.interpret("0, 1"));
     }
 }
