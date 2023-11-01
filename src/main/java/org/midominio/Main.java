@@ -1,34 +1,27 @@
 package org.midominio;
 
 
-//import org.midominio.behavioral.strategy.CapitalStrategyTextFormatter;
-//import org.midominio.behavioral.strategy.Context;
-//import org.midominio.behavioral.strategy.LowerStrategyTextFormatter;
+//import org.midominio.behavioral.templatemethod.Payment;
+//import org.midominio.behavioral.templatemethod.Paypal;
+//import org.midominio.behavioral.templatemethod.Visa;
 
-import org.midominio.behavioral.strategy2.context.Context;
-import org.midominio.behavioral.strategy2.strategies.CircleStrategy;
-import org.midominio.behavioral.strategy2.strategies.TriangleStrategy;
+import org.midominio.behavioral.templatemethod2.DataMiner;
+import org.midominio.behavioral.templatemethod2.PDFDataMiner;
 
 public class Main {
     public static void main(String[] args) {
         testPattern();
     }
     private static void testPattern(){
-        //Strategy 1
-//        Context context = new Context(new CapitalStrategyTextFormatter());
-//        context.publishText("Este texto deberá ser convertido a mayúsculas");
+        //Template method 1
+//        Payment payment = new Visa();
+//        payment.makePayment();
 //
-//        context = new Context(new LowerStrategyTextFormatter());
-//        context.publishText("ESTE TEXTO DEBERÁ SER CONVERTIDO A MINÚSCULAS");
+//        payment = new Paypal();
+//        payment.makePayment();
 
-        //Strategy 2
-        //circulo
-        Context context = new Context(new CircleStrategy(13));
-        context.calculateArea();
-
-        //triangulo
-        context = new Context(new TriangleStrategy(10, 7));
-        context.calculateArea();
-
+        //Template method 2
+        DataMiner dataMiner = new PDFDataMiner();
+        dataMiner.mine("C:\\Antonio\\prueba.txt");
     }
 }
