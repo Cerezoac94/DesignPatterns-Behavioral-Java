@@ -1,27 +1,26 @@
 package org.midominio;
 
 
-//import org.midominio.behavioral.templatemethod.Payment;
-//import org.midominio.behavioral.templatemethod.Paypal;
-//import org.midominio.behavioral.templatemethod.Visa;
+//import org.midominio.behavioral.visitor.*;
 
-import org.midominio.behavioral.templatemethod2.DataMiner;
-import org.midominio.behavioral.templatemethod2.PDFDataMiner;
+import org.midominio.behavioral.visitor2.computer.Computer;
+import org.midominio.behavioral.visitor2.computer.ComputerPart;
+import org.midominio.behavioral.visitor2.visitor.ComputerPartDisplayVisitor;
 
 public class Main {
     public static void main(String[] args) {
         testPattern();
     }
     private static void testPattern(){
-        //Template method 1
-//        Payment payment = new Visa();
-//        payment.makePayment();
+        //Visitor 1
+//        OfertaElement ofertaElement = new OfertaGasolina();
+//        ofertaElement.accept(new BlackCreditCardVisitor());
 //
-//        payment = new Paypal();
-//        payment.makePayment();
+//        ofertaElement = new OfertaVuelos();
+//        ofertaElement.accept(new ClassicCreditCardVisitor());
 
-        //Template method 2
-        DataMiner dataMiner = new PDFDataMiner();
-        dataMiner.mine("C:\\Antonio\\prueba.txt");
+        //Visitor 2
+        ComputerPart computer = new Computer();
+        computer.accept(new ComputerPartDisplayVisitor());
     }
 }
